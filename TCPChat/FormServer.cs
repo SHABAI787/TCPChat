@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TCPChat
@@ -20,15 +13,10 @@ namespace TCPChat
             server = new Server(this);
         }
 
-        private void FormServer_Load(object sender, EventArgs e)
-        {
-
-        }
-
         public void AddHistory(string text)
         {
-            this.Invoke((MethodInvoker)delegate 
-            { 
+            this.Invoke((MethodInvoker)delegate
+            {
                 richTextBoxHistory.AppendText($"{text}\n");
             });
         }

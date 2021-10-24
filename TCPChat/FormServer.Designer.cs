@@ -186,7 +186,6 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "FormServer";
             this.Text = "Сервер";
-            this.Load += new System.EventHandler(this.FormServer_Load);
             this.groupBox2.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
