@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net.Sockets;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using TCPChat;
 
 namespace TCPChat_Client
@@ -33,7 +26,7 @@ namespace TCPChat_Client
         public bool IsConnected { get { return isConnected; } }
         /// <summary> Авторизирован </summary>
         public bool IsAuthorized { get { return isAuthorized; } }
-        
+
 
         /// <summary>
         /// Конструктор
@@ -91,18 +84,6 @@ namespace TCPChat_Client
         }
 
         /// <summary>
-        /// Отправить серверу
-        /// </summary>
-        /// <param name="obl"></param>
-        private void Send(object obl)
-        {
-            if (IsConnected)
-            {
-                Server.Send(stream, obl);
-            }
-        }
-
-        /// <summary>
         /// Отправить сообщение
         /// </summary>
         /// <param name="text">Текст сообщения</param>
@@ -114,16 +95,11 @@ namespace TCPChat_Client
             message.Sender = this.ID;
             message.Recipient = recipient;
             message.Text = text;
-            Send(message);
-        }
 
-        /// <summary>
-        /// Отправить сообщение
-        /// </summary>
-        /// <param name="message">Сообщение</param>
-        public void SendMessage(Message message)
-        {
-            Send(message);
+            if (IsConnected)
+            {
+                Server.Send(stream, message);
+            }
         }
 
         /// <summary>

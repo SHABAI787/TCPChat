@@ -21,13 +21,7 @@ namespace TCPChat
         private byte[] bytes = new byte[1024];
         private TcpListener listener = null;
         private List<AuthorizedСlient> clients = new List<AuthorizedСlient>();
-        private byte[] Data { get; set; }
        
-        /// <summary>
-        /// Сервер запущен
-        /// </summary>
-        public bool IsStart { get { return active; } }
-
         /// <summary>
         /// Форма сервера
         /// </summary>
@@ -39,9 +33,9 @@ namespace TCPChat
         }
 
         /// <summary>
-        /// Запустить сервер
+        /// Запуск
         /// </summary>
-        /// <param name="port">Порт для прослушивания</param>
+        /// <param name="port">Порт</param>
         public void Start(int port)
         {
             listener = new TcpListener(IPAddress.Any, port);
@@ -64,7 +58,7 @@ namespace TCPChat
         /// <summary>
         /// Прослушивать поток
         /// Сервер прослуживает только новые подключения
-        /// Все обмены данных выполняются в отдельном потоке AuthorizedСlient
+        /// Все обмены данных выполняются в отдельном потоке
         /// </summary>
         private void Listen()
         {
@@ -127,7 +121,7 @@ namespace TCPChat
                     DataGridViewRow delRow = null;
                     for (int i = 0; i < FormServer.dataGridView1.Rows.Count; i++)
                     {
-                        if(FormServer.dataGridView1.Rows[i].Cells["ColumnId"].Value.ToString() == authorizationData.ID)
+                        if (FormServer.dataGridView1.Rows[i].Cells["ColumnId"].Value.ToString() == authorizationData.ID)
                         {
                             delRow = FormServer.dataGridView1.Rows[i];
                             break;
@@ -218,11 +212,6 @@ namespace TCPChat
             return obj;
         }
 
-        public object Deserialize()
-        {
-            return Deserialize(this.Data);
-        }
-
         public static void Send(NetworkStream networkStream, object obj)
         {
             var data = Serialize(obj);
@@ -231,7 +220,7 @@ namespace TCPChat
 
         public static void AddHisory(string text)
         {
-            if(FormServer != null)
+            if (FormServer != null)
                 FormServer.AddHistory(text);
         }
     }
